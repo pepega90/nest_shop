@@ -1,4 +1,4 @@
-# nest_shop E-Commerce Microservices Platform
+# nest_shop e-Commerce microservices
 
 This is a microservices-based e-commerce platform built using the NestJS framework. It leverages a distributed architecture with Kafka as the message broker and PostgreSQL as the database for each service. The platform features user authentication, a cart and wishlist system, order processing, and payment integration. The `user_service` acts as a gateway, routing requests to the `product_service` and `shopping_service`. This architecture allows all services to be accessed through the `user_service`.
 
@@ -28,7 +28,7 @@ This is a microservices-based e-commerce platform built using the NestJS framewo
 - **Message Broker**: Kafka is used for message-based communication between services. Each service publishes and subscribes to relevant Kafka topics for event-driven interactions, such as order creation, payment updates, and product stock management.
 - **Gateway**: The `user_service` acts as a gateway for routing requests to the `product_service` and `shopping_service`. These services do not expose their own ports, relying on the gateway to handle external requests.
 
-## Monitoring and Metrics
+## Monitoring and Metrics (Coming Soon)
 The platform includes monitoring and observability tools to ensure reliable operation and performance tracking:
 
 - **Prometheus**: Collects real-time metrics from the services, such as request counts, response times, and error rates.
@@ -40,8 +40,8 @@ The platform includes monitoring and observability tools to ensure reliable oper
 
 To run this project, ensure that you have the following installed:
 
-- Node.js (>=14.x)
-- NestJS (7.x or 8.x)
+- Node.js
+- NestJS
 - Kafka
 - PostgreSQL
 - Docker (optional, for easier setup)
