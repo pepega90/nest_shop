@@ -8,11 +8,19 @@ export class OrdersController {
 
   @MessagePattern("create.order")
   public async createOrder(data: any) {
-    console.log("order service")
-    console.log(data);
-    console.log("order service")
+    const orderCreated = await this.ordersService.createOrder(data);
     return {
-      message: "order service (create-order) is called"
+      status: 200,
+      message: "Success created Order",
+      data: orderCreated
+    }
+  }
+
+  @MessagePattern("get.user.order")
+  public async getUserOrder(data: any) {
+    const orderUser = await this.ordersService.findOne(data);
+    return {
+      data: orderUser
     }
   }
 }
