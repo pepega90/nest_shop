@@ -11,6 +11,7 @@ export class KafkaProvider {
     async onModuleInit() {
         this.kafkaClient.subscribeToResponseOf("create.order");
         this.kafkaClient.subscribeToResponseOf("get.user.order")
+        this.kafkaClient.subscribeToResponseOf("pay.user.order")
         await this.kafkaClient.connect();
       }
 

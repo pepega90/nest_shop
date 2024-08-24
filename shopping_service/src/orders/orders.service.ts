@@ -16,45 +16,46 @@ export class OrdersService {
     public async createOrder(payload) {
         let userCartItems = payload.carts.items;
         
-        // Ensure totalAmount and items are initialized
+        // initialize orderUser
         let orderUser = this.orderRepository.create({
             status: "PENDING",
             userId: payload.id,
-            totalAmount: 0,  // Initialize totalAmount to 0
-            items: []  // Initialize empty items array
+            totalAmount: 0,  // init awal-awal 0
+            items: []  // init awal-awal array kosong
         });
 
-        // Save the order first before adding items
+        // lalu create orderUser
         orderUser = await this.orderRepository.save(orderUser);
 
-        // Loop through cart items and create order items
+        // loop ke semua item dari carts user yang berasal dari payload
         for (let item of userCartItems) {
+            // create order item
             let orderItem = this.orderItemRepo.create({
-                order: orderUser,  // Assign the order reference
-                price: parseFloat(item.price),  // Ensure price is parsed correctly
+                order: orderUser,  
+                price: parseFloat(item.price),
                 productName: item.productName,
                 qty: item.quantity
             });
 
-            // Add the item price to the total amount
+            // kalkulasi total amount order user
             orderUser.totalAmount += orderItem.price * orderItem.qty;
 
-            // Save the order item
+            // save order item 
             await this.orderItemRepo.save(orderItem);
 
-            // Add the saved order item to the order's items array
+            // lalu push ke array items di orderUser
             orderUser.items.push(orderItem);
         }
 
-        // Update the totalAmount in the order after all items have been processed
+        // update total amountnya
         await this.orderRepository.update(orderUser.id, {
             totalAmount: orderUser.totalAmount
         });
 
-        // Return the final order
+        // lalu return 
         return await this.orderRepository.findOne({
             where: { id: orderUser.id },
-            relations: ['items'],  // Ensure items relation is returned
+            relations: ['items'],
         });
     }
 
@@ -62,5 +63,16 @@ export class OrdersService {
         return await this.orderRepository.find({where: {userId: id}, relations: {
             items: true,
         }})
+    }
+
+    public async paymentOrder(userId: number, orderId) {
+        let orderUser = undefined;
+        try {
+            orderUser = await this.orderRepository.findOne({where: {id: orderId, userId: userId}})
+            orderUser.status = "PAID";
+            return await this.orderRepository.save(orderUser)
+        } catch (error) {
+            throw error;
+        }
     }
 }

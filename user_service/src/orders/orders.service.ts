@@ -45,4 +45,8 @@ export class OrdersService {
     public async getUserOrder(id :number) {
         return await this.kafkaProvider.publishResponse("get.user.order", JSON.stringify(id))
     }
+
+    public async payOrder(id:number, orderId: number) {
+        return await this.kafkaProvider.publishResponse("pay.user.order", JSON.stringify({userId: id, orderId}))
+    }
 }

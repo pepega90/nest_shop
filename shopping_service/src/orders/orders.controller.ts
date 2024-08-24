@@ -23,4 +23,12 @@ export class OrdersController {
       data: orderUser
     }
   }
+
+  @MessagePattern("pay.user.order")
+  public async paymentOrderUser({userId, orderId}: any) {
+    const updatedOrder = await this.ordersService.paymentOrder(userId, orderId)
+    return {
+      data: updatedOrder
+    }
+  }
 }
