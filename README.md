@@ -2,6 +2,10 @@
 
 This is a microservices-based e-commerce platform built using the NestJS framework. It leverages a distributed architecture with Kafka as the message broker and PostgreSQL as the database for each service. The platform features user authentication, a cart and wishlist system, order processing, and payment integration. The `user_service` acts as a gateway, routing requests to the `product_service` and `shopping_service`. This architecture allows all services to be accessed through the `user_service`.
 
+## Architecture Diagram
+
+![Architecture Diagram](https://github.com/pepega90/nest_shop/raw/main/finan_drag.png)
+
 ## Features
 
 - **User Authentication**: Secure user registration and login with JWT.
