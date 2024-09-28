@@ -4,7 +4,7 @@ This is a microservices-based e-commerce platform built using the NestJS framewo
 
 ## Architecture Diagram
 
-![Architecture Diagram](https://github.com/pepega90/nest_shop/blog/main/finan_drag.png)
+![Architecture Diagram](https://github.com/pepega90/nest_shop/blob/main/diag.png)
 
 ## Features
 
